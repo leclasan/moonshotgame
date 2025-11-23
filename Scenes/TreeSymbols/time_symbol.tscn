@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6wb7cxjj1srv"]
+
+[ext_resource type="Texture2D" uid="uid://cnscsj278wcap" path="res://Assets/TreeSymbols/clokc_tree_symbol.png" id="1_lym1t"]
+[ext_resource type="Script" uid="uid://dafprebpd6u3k" path="res://Scripts/TreeSymbols/time_symbol.gd" id="2_sasot"]
+[ext_resource type="LabelSettings" uid="uid://dv26v5erugj05" path="res://Assets/LabelSetting/tree_symbol_label_settings.tres" id="3_0u27o"]
+[ext_resource type="Script" uid="uid://2dnurfg7obu1" path="res://Scripts/tooltip.gd" id="4_rl3vt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u27o"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.16924527, 0.1692453, 0.16924527, 0.69411767)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="TimeSymbol" type="TextureButton"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+disabled = true
+texture_normal = ExtResource("1_lym1t")
+script = ExtResource("2_sasot")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 53.0
+offset_right = 71.0
+offset_bottom = 66.0
+text = "0/5"
+label_settings = ExtResource("3_0u27o")
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+top_level = true
+layout_mode = 0
+offset_right = 61.621624
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0u27o")
+script = ExtResource("4_rl3vt")
+
+[node name="TooltipText" type="RichTextLabel" parent="Tooltip"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 7
+theme_override_font_sizes/bold_font_size = 7
+theme_override_font_sizes/bold_italics_font_size = 7
+theme_override_font_sizes/italics_font_size = 7
+theme_override_font_sizes/mono_font_size = 7
+bbcode_enabled = true
+fit_content = true
+
+[connection signal="mouse_entered" from="." to="Tooltip" method="toggle" binds= [true]]
+[connection signal="mouse_exited" from="." to="Tooltip" method="toggle" binds= [false]]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

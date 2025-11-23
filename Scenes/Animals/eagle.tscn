@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://e23q4pht4om3"]
+
+[ext_resource type="Texture2D" uid="uid://dpphul3xjpf5f" path="res://Assets/Animals/eagle.png" id="1_bi1vv"]
+[ext_resource type="Script" uid="uid://dg77xc8gymbww" path="res://Scripts/Animals/eagle.gd" id="1_dtsx3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtsx3"]
+atlas = ExtResource("1_bi1vv")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut34s"]
+atlas = ExtResource("1_bi1vv")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1btb8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtsx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut34s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqxts"]
+size = Vector2(45, 54)
+
+[node name="Eagle" type="Area2D"]
+script = ExtResource("1_dtsx3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.2, 3.2)
+sprite_frames = SubResource("SpriteFrames_1btb8")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, -2)
+shape = SubResource("RectangleShape2D_tqxts")
+
+[node name="AtackTimer" type="Timer" parent="."]
+wait_time = 1.6999999999999997
+one_shot = true
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="AtackTimer" to="." method="_on_atack_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

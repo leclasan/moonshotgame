@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cym4remhjs6kb"]
+
+[ext_resource type="Script" uid="uid://bleu6n08oxgvc" path="res://Scripts/killed_enemies_bar.gd" id="1_n4458"]
+
+[node name="KilledEnemiesBar" type="ProgressBar"]
+offset_right = 79.0
+offset_bottom = 27.0
+step = 1.0
+allow_greater = true
+show_percentage = false
+script = ExtResource("1_n4458")

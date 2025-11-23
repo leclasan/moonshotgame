@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7veohepprqg0"]
+
+[ext_resource type="Texture2D" uid="uid://dpphul3xjpf5f" path="res://Assets/Animals/eagle.png" id="1_e6u8s"]
+[ext_resource type="Script" uid="uid://b106e14ebp24f" path="res://Scripts/Animals/eagle_bullet.gd" id="1_q7lga"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7lga"]
+size = Vector2(8, 28)
+
+[node name="EagleBullet" type="Area2D" groups=["weapons"]]
+script = ExtResource("1_q7lga")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_e6u8s")
+region_enabled = true
+region_rect = Rect2(60, 0, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_q7lga")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

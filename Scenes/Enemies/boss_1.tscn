@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp3t2an2u47g3"]
+
+[ext_resource type="Texture2D" uid="uid://t1fk1jgbeksf" path="res://Assets/Enemies/bos1.png" id="1_1foa5"]
+[ext_resource type="Script" uid="uid://xh23rtnv1osp" path="res://Scripts/Enemies/boss_1.gd" id="1_hld2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hld2v"]
+size = Vector2(16, 16)
+
+[node name="Boss1" type="Area2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_hld2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1foa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hld2v")
+
+[node name="AtackTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="AtackTimer" to="." method="_on_atack_timer_timeout"]

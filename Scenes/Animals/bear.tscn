@@ -1,0 +1,151 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2uig4mq1gi7m"]
+
+[ext_resource type="Script" uid="uid://ufbrfs3s8f2r" path="res://Scripts/Animals/bear.gd" id="1_s1mho"]
+[ext_resource type="Texture2D" uid="uid://djloes7frgv3o" path="res://Assets/Animals/oso_pardo_definitivo.png" id="2_atqqa"]
+[ext_resource type="Texture2D" uid="uid://h682g18w8ci4" path="res://Assets/Animals/oso_ataque.png" id="2_siogh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxrfj"]
+radius = 62.008064
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpjwo"]
+atlas = ExtResource("2_atqqa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4or10"]
+atlas = ExtResource("2_atqqa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2imu7"]
+atlas = ExtResource("2_atqqa")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elcei"]
+atlas = ExtResource("2_atqqa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlyxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpjwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4or10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2imu7")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elcei")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1wsf"]
+radius = 26.0
+height = 52.0
+
+[sub_resource type="Animation" id="Animation_atqqa"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attack/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_siogh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attack/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxrfj"]
+_data = {
+&"RESET": SubResource("Animation_siogh"),
+&"attack": SubResource("Animation_atqqa")
+}
+
+[node name="Bear" type="Area2D"]
+z_index = 15
+script = ExtResource("1_s1mho")
+
+[node name="Attack" type="Area2D" parent="." groups=["weapons"]]
+visible = false
+z_as_relative = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Attack"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_siogh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_yxrfj")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3.2, 3.2)
+sprite_frames = SubResource("SpriteFrames_mlyxe")
+animation = &"Attack"
+autoplay = "Idle"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u1wsf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yxrfj")
+}
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

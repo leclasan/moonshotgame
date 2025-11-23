@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=3 uid="uid://5kqlkpe7n2ck"]
+
+[ext_resource type="Script" uid="uid://dnfgg0pj0gev7" path="res://Scripts/button.gd" id="1_4egoq"]
+[ext_resource type="Script" uid="uid://dd0lugdj6sl6n" path="res://Scripts/tree_scene.gd" id="1_05fi4"]
+[ext_resource type="Texture2D" uid="uid://ladsy23h3r5j" path="res://Assets/tile_0093.png" id="3_v4lfl"]
+[ext_resource type="PackedScene" uid="uid://c6oggs1qilx77" path="res://Scenes/TreeSymbols/velocity_symbol.tscn" id="4_0e2kv"]
+[ext_resource type="PackedScene" uid="uid://c6wb7cxjj1srv" path="res://Scenes/TreeSymbols/time_symbol.tscn" id="4_af3as"]
+[ext_resource type="PackedScene" uid="uid://dge8pyfgtxnks" path="res://Scenes/TreeSymbols/life_symbol.tscn" id="5_3fwva"]
+[ext_resource type="PackedScene" uid="uid://diwryluhlda2a" path="res://Scenes/TreeSymbols/cooldown_symbol.tscn" id="5_aa7o3"]
+[ext_resource type="PackedScene" uid="uid://uvdergfw1br2" path="res://Scenes/TreeSymbols/damage_symbol.tscn" id="6_iek5t"]
+
+[node name="TreeScene" type="Node2D"]
+script = ExtResource("1_05fi4")
+
+[node name="SkillTree" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 953.0
+offset_bottom = 648.0
+
+[node name="TimeSymbol" parent="SkillTree" instance=ExtResource("4_af3as")]
+visible = true
+layout_mode = 0
+offset_left = 536.0
+offset_top = 295.0
+offset_right = 600.0
+offset_bottom = 359.0
+disabled = false
+text = "[b]Extra Time[/b] [br] You get 5 more seconds"
+
+[node name="CooldownSymbol" parent="SkillTree" node_paths=PackedStringArray("before_symbol") instance=ExtResource("5_aa7o3")]
+layout_mode = 0
+offset_left = 437.0
+offset_top = 216.0
+offset_right = 501.0
+offset_bottom = 280.0
+before_symbol = NodePath("../TimeSymbol")
+index = 2
+text = "[b]Attack Speed[/b] [br] You attack 5% faster"
+
+[node name="Line2D" type="Line2D" parent="SkillTree/CooldownSymbol"]
+z_index = -1
+z_as_relative = false
+position = Vector2(-437, -216)
+points = PackedVector2Array(468, 246, 568, 328)
+default_color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+
+[node name="VelocitySymbol" parent="SkillTree" node_paths=PackedStringArray("before_symbol") instance=ExtResource("4_0e2kv")]
+layout_mode = 0
+offset_left = 613.0
+offset_top = 207.0
+offset_right = 677.0
+offset_bottom = 271.0
+before_symbol = NodePath("../TimeSymbol")
+index = 3
+
+[node name="Line2D2" type="Line2D" parent="SkillTree/VelocitySymbol"]
+z_index = -1
+z_as_relative = false
+position = Vector2(-613, -207)
+points = PackedVector2Array(631, 265, 568, 328)
+default_color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+
+[node name="LifeSymbol" parent="SkillTree" node_paths=PackedStringArray("before_symbol") instance=ExtResource("5_3fwva")]
+layout_mode = 0
+offset_left = 711.0
+offset_top = 116.0
+offset_right = 775.0
+offset_bottom = 180.0
+before_symbol = NodePath("../VelocitySymbol")
+index = 4
+
+[node name="Line2D3" type="Line2D" parent="SkillTree/LifeSymbol"]
+z_index = -1
+z_as_relative = false
+position = Vector2(-618, -209)
+points = PackedVector2Array(651, 244, 568, 328)
+default_color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+
+[node name="DamageSymbol" parent="SkillTree" node_paths=PackedStringArray("before_symbol") instance=ExtResource("6_iek5t")]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 133.0
+offset_right = 433.0
+offset_bottom = 197.0
+before_symbol = NodePath("../CooldownSymbol")
+index = 5
+
+[node name="Line2D2" type="Line2D" parent="SkillTree/DamageSymbol"]
+z_index = -1
+z_as_relative = false
+position = Vector2(-467, -209)
+points = PackedVector2Array(500, 249, 568, 328)
+default_color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+
+[node name="Coliseum" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Animals" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RightBarContainer" type="PanelContainer" parent="."]
+offset_left = 938.0
+offset_top = 5.0
+offset_right = 1148.0
+offset_bottom = 645.0
+
+[node name="PlayButton" type="Button" parent="RightBarContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 70
+text = "PLAY"
+script = ExtResource("1_4egoq")
+
+[node name="MoneyLabel" type="Label" parent="RightBarContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "1000"
+
+[node name="CoinSprite" type="Sprite2D" parent="RightBarContainer"]
+position = Vector2(128, 21.999996)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_v4lfl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightBarContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="SkillTreeButton" type="Button" parent="RightBarContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 28
+text = "Skill Tree"
+
+[node name="ColiseumButton" type="Button" parent="RightBarContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 28
+text = "Coliseum"
+
+[node name="AnimalsButton" type="Button" parent="RightBarContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 28
+text = "Animals"
+
+[connection signal="pressed" from="RightBarContainer/PlayButton" to="RightBarContainer/PlayButton" method="_on_pressed"]
+[connection signal="pressed" from="RightBarContainer/VBoxContainer/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]
+[connection signal="pressed" from="RightBarContainer/VBoxContainer/ColiseumButton" to="." method="_on_colliseum_button_pressed"]
+[connection signal="pressed" from="RightBarContainer/VBoxContainer/AnimalsButton" to="." method="_on_animals_button_pressed"]

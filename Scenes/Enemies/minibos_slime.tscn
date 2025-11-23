@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://nlfq3kiof5ge"]
+
+[ext_resource type="Script" uid="uid://q555vt0e347o" path="res://Scripts/Enemies/minibos_slime.gd" id="1_cvjjb"]
+[ext_resource type="Texture2D" uid="uid://bvhu3hop1a8kh" path="res://Assets/Enemies/Sprite-0001.png" id="2_00372"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpykp"]
+size = Vector2(70, 70)
+
+[node name="MinibosSlime" type="Area2D"]
+script = ExtResource("1_cvjjb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.4, 4.4)
+texture = ExtResource("2_00372")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wpykp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

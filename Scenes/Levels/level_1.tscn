@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtxiwcav6njde"]
+
+[ext_resource type="Script" uid="uid://cnkhqueulc6gu" path="res://Scripts/level_1.gd" id="1_cyadu"]
+[ext_resource type="PackedScene" uid="uid://c5o4fhjssrhfe" path="res://Scenes/player.tscn" id="2_xgxfi"]
+[ext_resource type="PackedScene" uid="uid://cs72i0sdbso1h" path="res://Scenes/lose.tscn" id="3_5f3p6"]
+[ext_resource type="Texture2D" uid="uid://ladsy23h3r5j" path="res://Assets/tile_0093.png" id="4_jv26f"]
+[ext_resource type="PackedScene" uid="uid://cym4remhjs6kb" path="res://Scenes/killed_enemies_bar.tscn" id="5_cyadu"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_cyadu")
+next_level = "res://Scenes/Levels/level_2.tscn"
+enemy_reload = 5.0
+
+[node name="Player" parent="." instance=ExtResource("2_xgxfi")]
+position = Vector2(576, 317)
+
+[node name="TimeTimer" type="Timer" parent="."]
+process_mode = 1
+autostart = true
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 30
+text = "10"
+metadata/_edit_use_anchors_ = true
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = 1083.0
+offset_right = 1152.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 30
+text = "1000"
+metadata/_edit_use_anchors_ = true
+
+[node name="Lose" parent="." instance=ExtResource("3_5f3p6")]
+offset_left = 566.0
+offset_top = 393.0
+offset_right = 566.0
+offset_bottom = 393.0
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="CoinSprite" type="Sprite2D" parent="."]
+position = Vector2(1071, 21.999998)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_jv26f")
+
+[node name="KilledEnemiesBar" parent="." instance=ExtResource("5_cyadu")]
+offset_top = 41.0
+offset_right = 174.0
+offset_bottom = 68.0
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="TimeTimer" to="." method="_on_time_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

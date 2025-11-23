@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4er8ef1iddom"]
+
+[ext_resource type="Script" uid="uid://d18chol1pbxhn" path="res://Scripts/Enemies/enemy_spawn.gd" id="1_pwswg"]
+[ext_resource type="Texture2D" uid="uid://dd5v0c203nyr5" path="res://icon.svg" id="2_p8p7v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_um0s4"]
+size = Vector2(65, 66)
+
+[node name="EnemySpawn" type="Area2D"]
+script = ExtResource("1_pwswg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_p8p7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_um0s4")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.1
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
