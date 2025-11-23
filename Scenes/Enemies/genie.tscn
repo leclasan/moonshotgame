@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqrqxdnoawuic"]
+
+[ext_resource type="Texture2D" uid="uid://cwc3uueitwbex" path="res://Assets/Enemies/genie.png" id="1_7hq6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdsrp"]
+size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hq6c"]
+size = Vector2(26, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u26o5"]
+size = Vector2(32, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvbf2"]
+size = Vector2(52, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du1jj"]
+size = Vector2(44, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ugbd"]
+size = Vector2(26, 7)
+
+[node name="Genie" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("1_7hq6c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kdsrp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_7hq6c")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_u26o5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_kvbf2")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_du1jj")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 22.5)
+shape = SubResource("RectangleShape2D_7ugbd")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]

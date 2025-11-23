@@ -7,6 +7,8 @@ var player_life = 1
 var player_speed = 120
 var player_attack_speed = 1.3
 var player_damage = 10
+var dash_cooldown = 1
+var dash_distance = 500
 
 var collect_range = 48
 

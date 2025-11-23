@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://2d3pmliyi5fr"]
+[gd_scene load_steps=7 format=3 uid="uid://2d3pmliyi5fr"]
 
 [ext_resource type="Script" uid="uid://upib8t2pqgs4" path="res://Scripts/Enemies/zombie.gd" id="1_ttf1p"]
 [ext_resource type="Texture2D" uid="uid://cvokde77bbd2w" path="res://Assets/Enemies/zombie.png" id="2_yk0r7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n70j1"]
-size = Vector2(46, 48)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttf1p"]
+size = Vector2(32, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk0r7"]
+size = Vector2(38, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d8mn"]
+size = Vector2(29, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6bce"]
+size = Vector2(32, 12)
 
 [node name="Zombie" type="Area2D" groups=["Enemies"]]
 script = ExtResource("1_ttf1p")
@@ -14,7 +23,20 @@ scale = Vector2(3.2, 3.2)
 texture = ExtResource("2_yk0r7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_n70j1")
+position = Vector2(-3, 0.5)
+shape = SubResource("RectangleShape2D_ttf1p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -6.5)
+shape = SubResource("RectangleShape2D_yk0r7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(4.5, 11)
+shape = SubResource("RectangleShape2D_8d8mn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(6, 11)
+shape = SubResource("RectangleShape2D_o6bce")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

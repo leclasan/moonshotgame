@@ -7,8 +7,6 @@ class_name Player
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
-var dash_speed = 500
-
 var can_attack = true
 var can_dash = true
 
@@ -23,6 +21,8 @@ func _ready() -> void:
 	collector_collision.shape.radius = WorldStats.collect_range
 	
 	attack_timer.wait_time = WorldStats.player_attack_speed
+	
+	dash_cooldown_timer.wait_time = WorldStats.dash_cooldown
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 				dash_timer.start()
 				$DashAnimationPlayer.play("dash")
 		STATES.DASHING:
-			velocity = dash_direccion * dash_speed
+			velocity = dash_direccion * WorldStats.dash_distance
 			move_and_slide()
 
 
@@ -60,7 +60,7 @@ func _on_dash_timer_timeout() -> void:
 	state = STATES.MOVING
 	dash_direccion = Vector2.ZERO
 	dash_cooldown_timer.start()
-	await get_tree().create_timer(1)
+	await get_tree().create_timer(0.215).timeout
 	$DashAnimationPlayer.play("not_dash")
 
 
