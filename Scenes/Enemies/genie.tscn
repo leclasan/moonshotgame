@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqrqxdnoawuic"]
+[gd_scene load_steps=9 format=3 uid="uid://bqrqxdnoawuic"]
 
 [ext_resource type="Texture2D" uid="uid://cwc3uueitwbex" path="res://Assets/Enemies/genie.png" id="1_7hq6c"]
+[ext_resource type="Script" uid="uid://fcal8ua83xnt" path="res://Scripts/Enemies/genie.gd" id="1_kdsrp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdsrp"]
 size = Vector2(38, 38)
@@ -20,7 +21,8 @@ size = Vector2(44, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ugbd"]
 size = Vector2(26, 7)
 
-[node name="Genie" type="Area2D"]
+[node name="Genie" type="Area2D" groups=["Enemies"]]
+script = ExtResource("1_kdsrp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.2, 3.2)
@@ -49,6 +51,5 @@ shape = SubResource("RectangleShape2D_du1jj")
 position = Vector2(-3, 22.5)
 shape = SubResource("RectangleShape2D_7ugbd")
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
