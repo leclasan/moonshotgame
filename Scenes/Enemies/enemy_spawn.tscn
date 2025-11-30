@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um0s4"]
 size = Vector2(65, 66)
 
-[node name="EnemySpawn" type="Area2D"]
+[node name="EnemySpawn" type="Area2D" groups=["Enemies"]]
 script = ExtResource("1_pwswg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

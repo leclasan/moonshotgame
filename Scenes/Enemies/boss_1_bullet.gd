@@ -4,7 +4,6 @@ var velocity = Vector2(140,-150)
 var accel = Vector2(0,90)
 
 
-
 func _ready() -> void:
 	pass
 

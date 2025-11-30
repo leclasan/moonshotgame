@@ -22,7 +22,7 @@ var minibos_scene = preload("res://Scenes/Enemies/minibos_slime.tscn")
 @onready var spawn_timer: Timer = $SpawnTimer
 
 var killed_enemies = 0
-var necesary_kills = 15
+var necesary_kills = 1
 
 var is_minibos = false
 
@@ -51,6 +51,8 @@ func _process(delta: float) -> void:
 	
 	if killed_enemies >= necesary_kills and not is_minibos:
 		is_minibos = true
+		for enemy in get_tree().get_node_count_in_group("Enemies"):
+			get_tree().get_nodes_in_group("Enemies").get(enemy).queue_free()
 		var minibos = minibos_scene.instantiate()
 		add_child(minibos)
 

@@ -21,7 +21,7 @@ var starting_enemies = 4
 var enemy_spawn_time = 1
 var enemy_amount = 1
 
-var money = 0
+var money = 1000
 var this_run_money = 0
 
 var time = 10
